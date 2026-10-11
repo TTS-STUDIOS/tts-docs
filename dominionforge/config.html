@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DominionForge — Configuration reference · TTS-Studio docs</title>
-<meta name="description" content="Factions, wars and 1.8 raiding physics on 1.21">
+<meta name="description" content="Factions, wars and 1.8 raiding physics, 1.20.4 to 26.x">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -875,9 +875,11 @@ build:
 
   # What printing a block that is NOT in `prices` costs. A cannon needs dozens of
   # blocks (slabs, repeaters, wires, trapdoors...) and listing every one is a
-  # chore; with a price here, anything unlisted can still be printed. It never
-  # applies to selling: the wand only pays what is listed. -1 = unlisted blocks
-  # cannot be printed.
+  # chore; with a price here, any ORDINARY unlisted block can still be printed.
+  # Not ores, mineral blocks, TNT, heads, shulker boxes, ender chests, sponges or
+  # anything as blast-proof as obsidian: list those above if you want them. A
+  # printed block never drops anything, so this never turns into items.
+  # -1 = unlisted blocks cannot be printed.
   printer-default-price: 1
 
   # Never printed, whatever their price: blocks nobody can get in survival or
