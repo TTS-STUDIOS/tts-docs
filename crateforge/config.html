@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>mass-open</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>shop</code>, <code>mass-open</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
 # CrateForge — main configuration
 # ----------------------------------------------------------------------------
 # Free crate plugin for Paper and Spigot 1.19.4+. Every option below is annotated.
@@ -87,6 +87,13 @@ storage:
 # from triggering two animations simultaneously.
 cooldown:
   open-ms: 500       # Minimum milliseconds between two consecutive opens by the same player.
+
+# ===== Key shop (1.8.1) =====================================================
+# /cf shop sells every key with a SHOP obtain-method. false = the command only
+# answers &quot;not available&quot; and leaves tab-complete. Per player: crateforge.shop
+# (everyone by default).
+shop:
+  enabled: true
 
 # ===== Broadcast ============================================================
 # Server-wide announcement when a player wins a high-rarity prize. Uses the
