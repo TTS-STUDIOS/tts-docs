@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChattyChannels — Moderation filters · TTS-Studio docs</title>
+<meta name="description" content="Channels, private messages, ignore and friends in one">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel formats</a></li><li><a href='../chattychannels/moderation-filters.html'>Moderation filters</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Moderation filters</h1><p>New in 1.5.0. They live under <code>filters</code> in <code>channels.yml</code> and reload with <code>/cc reload</code>. They run on channel chat <strong>and</strong> on private messages (<code>/msg</code>, <code>/r</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>blocked-words</code></td>
+<td><code>[]</code></td>
+<td>Always blocked, whatever <code>words.mode</code> says. For slurs and threats</td>
+</tr>
+<tr>
+<td><code>watch-words</code></td>
+<td><code>[]</code></td>
+<td>Delivered as normal, but written to the flag log for staff to review</td>
+</tr>
+<tr>
+<td><code>advertising.enabled</code></td>
+<td><code>true</code></td>
+<td>Blocks server IPs and web addresses</td>
+</tr>
+<tr>
+<td><code>advertising.block-ips</code> / <code>block-domains</code></td>
+<td><code>true</code></td>
+<td>Which of the two to look for</td>
+</tr>
+<tr>
+<td><code>advertising.allowed-domains</code></td>
+<td>YouTube, Twitch, Imgur</td>
+<td>Your own domain and anything players may share; subdomains are included</td>
+</tr>
+<tr>
+<td><code>auto-mute.enabled</code></td>
+<td><code>true</code></td>
+<td>Mutes in every channel after repeated blocked messages</td>
+</tr>
+<tr>
+<td><code>auto-mute.strikes</code> / <code>window-minutes</code> / <code>minutes</code></td>
+<td><code>3</code> / <code>10</code> / <code>15</code></td>
+<td>3 blocked messages within 10 min 15 min mute</td>
+</tr>
+<tr>
+<td><code>flag-log.enabled</code></td>
+<td><code>true</code></td>
+<td>One JSON line per blocked or watched message in <code>logs/flagged.jsonl</code></td>
+</tr>
+<tr>
+<td><code>flag-log.include-spam</code></td>
+<td><code>false</code></td>
+<td>Also log duplicate, caps and flood hits</td>
+</tr>
+</tbody>
+</table>
+<p>Every word list (<code>words.list</code>, <code>blocked-words</code>, <code>watch-words</code>) also catches the usual dodges: accents, <code>0 4 3 1 5 7 @ $</code> for letters, repeated letters (<code>puuuto</code>) and letters split by spaces or dots (<code>p u t o</code>). A dodged word can't be masked in place, so that message is blocked.</p>
+<p>IP and address detection understands <code>play.server.net</code>, <code>123.45.67.89</code>, <code>server (dot) net</code> and <code>server [punto] net</code>. Coordinates and version numbers (<code>1.21.4</code>) are not mistaken for an IP. Two-letter endings that are also everyday words (<code>.es</code>, <code>.me</code>, <code>.co</code>…) only count with a subdomain (<code>mc.server.es</code>), so a sentence like <code>eso.es</code> passes.</p>
+<p>Flag log line:</p>
+<pre><code class="language-json">{&quot;ts&quot;:&quot;2026-10-11T04:40:00Z&quot;,&quot;server&quot;:&quot;survival&quot;,&quot;player&quot;:&quot;Steve&quot;,&quot;uuid&quot;:&quot;…&quot;,&quot;channel&quot;:&quot;global&quot;,&quot;kind&quot;:&quot;blocked-word&quot;,&quot;match&quot;:&quot;slur&quot;,&quot;message&quot;:&quot;…&quot;}
+</code></pre>
+<p><code>kind</code> is one of <code>blocked-word</code>, <code>ad</code>, <code>word</code>, <code>watch-word</code>, <code>auto-mute</code> or <code>spam-&lt;reason&gt;</code>. <code>channel</code> is <code>pm:&lt;target&gt;</code> for private messages.</p>
+<p>A player muted in every channel (<code>/mute &lt;player&gt; *</code> or the automatic mute) can't send private messages until the mute ends. Players with <code>chatchannels.bypass.filter</code> skip every filter. Messages: <code>filter-word-block</code>, <code>filter-ad-block</code>, <code>filter-auto-muted</code>.</p>
+<pre><code class="language-yaml">filters:
+  blocked-words: [&quot;slur1&quot;, &quot;threat phrase&quot;]
+  watch-words: [&quot;how old are you&quot;]
+  advertising:
+    enabled: true
+    block-ips: true
+    block-domains: true
+    allowed-domains: [&quot;myserver.net&quot;, &quot;youtube.com&quot;]
+  auto-mute:
+    enabled: true
+    strikes: 3
+    window-minutes: 10
+    minutes: 15
+  flag-log:
+    enabled: true
+    include-spam: false
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='channel-formats.html'>Channel formats</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
