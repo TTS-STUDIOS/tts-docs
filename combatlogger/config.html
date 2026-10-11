@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>safe-zone</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>safe-zone</code>, <code>notifications</code>, <code>combat-music</code>.</p><pre class='config'><code># ============================================================
 # CombatLogger — config.yml
 # ============================================================
 # Combat tagging on PvP/PvE damage, command blocking while tagged,
@@ -151,6 +151,32 @@ safe-zone:
 # combat-logs. Disable to suppress the broadcast entirely.
 notifications:
   staff-broadcast: true
+
+# ============================================================
+# COMBAT MUSIC  (v1.7.0)
+# ============================================================
+# While a player is tagged, a track plays for them alone; when it ends
+# the next one follows (never the same twice in a row). The tag ending,
+# death or logging out stops it. Each player can turn it off for
+# themselves with /combatmusic (alias /musica); the choice is kept.
+# A track is any sound event the client knows: a vanilla one (works with
+# no resource pack) or one from your server resource pack, e.g.
+# &quot;myserver:music.combat.boss&quot;. &quot;seconds&quot; is the track&#x27;s length, used to
+# start the next one on time.
+combat-music:
+  enabled: false
+  pvp-only: true                # Only a tag from another player starts music, not mob hits.
+  volume: 0.7                   # 0.0 - 1.0
+  category: RECORDS             # Volume slider players use for it: RECORDS (Jukebox/Note Blocks), MUSIC, MASTER...
+  stop-background-music: true   # Silence the game&#x27;s own music when the fight starts (1.19+).
+  now-playing: &quot;&lt;dark_gray&gt;♪ &lt;gray&gt;{title}&quot;   # Action bar when a track starts. &quot;&quot; = none.
+  tracks:
+    - sound: &quot;minecraft:music_disc.pigstep&quot;
+      title: &quot;Lena Raine - Pigstep&quot;
+      seconds: 149
+    - sound: &quot;minecraft:music_disc.otherside&quot;
+      title: &quot;Lena Raine - otherside&quot;
+      seconds: 196
 </code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='worldguard-integration.html'>WorldGuard integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>

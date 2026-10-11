@@ -60,13 +60,15 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger is a free plugin for Paper and Spigot, from 1.17 to 26.x, that stops players from escaping a fight by logging out. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger is a free plugin for Paper and Spigot, from 1.17 to 26.x, that stops players from escaping a fight by logging out. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back. Running to spawn doesn't work either: a red glass wall keeps them out.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Tagging:</strong> damage from a player or a mob tags both sides for 15 seconds. Arrows, tridents and thrown potions tag the player who fired them.</li>
 <li><strong>Countdown:</strong> a boss bar shows the seconds left, and a message tells the player when they're out of combat.</li>
 <li><strong>Blocked commands:</strong> <code>/tp</code>, <code>/tpa</code>, <code>/home</code>, <code>/spawn</code>, <code>/warp</code>, <code>/fly</code>, <code>/gamemode</code>, <code>/rtp</code>, <code>/back</code>, <code>/sethome</code>, <code>/trade</code> and <code>/shop</code> are denied while tagged, aliases included (blocking <code>/rtp</code> also blocks <code>/wild</code>). You can edit the list.</li>
+<li><strong>No hiding in spawn:</strong> a player tagged by another player can't walk into a safe zone. Near the border they see a red glass wall (only they see it, nothing is placed), and the server pushes them back if they try to cross, so a hacked client that hides the glass gets nowhere. Ender pearls into the zone are refused. Anyone who still gets in is killed at the last spot they stood outside, where their opponent can take the loot. Safe zones are WorldGuard regions with PvP denied and DominionForge's spawn.</li>
 <li><strong>The body:</strong> a player who disconnects while tagged leaves an NPC with their skin, armour and held items for 30 seconds. Anyone can kill it, and the server announces who did.</li>
 <li><strong>Coming back:</strong> if the body was killed, the player is killed on login (their items drop there) or has their inventory cleared, whichever you choose. If they reconnect while the body is still standing, they take its health and stay tagged.</li>
+<li><strong>Combat music (optional):</strong> a fight can have its own soundtrack. Turn it on and a player tagged by another player hears a track only they hear, a new one when it ends, and silence when the tag runs out. It ships off, with the Pigstep and otherside discs as an example; any sound in your server resource pack works too. Players turn it off for themselves with <code>/combatmusic</code>.</li>
 </ul><h2>For staff</h2><ul>
 <li><strong>Alerts:</strong> staff with <code>combatlogger.notify</code> are told when someone logs out in combat, with their total count.</li>
 <li><strong>History:</strong> each player's combat-log count is saved and survives restarts. <code>/combatlog top</code> lists the worst offenders.</li>
@@ -80,13 +82,15 @@
 </ol><h2>Commands and permissions</h2><ul>
 <li>Operators (<code>combatlogger.admin</code>): <code>/combatlog status|clear|reload|top</code>.</li>
 <li><code>combatlogger.notify</code> receives the combat-log alerts (operators by default).</li>
-<li><code>combatlogger.bypass</code> is never tagged; <code>combatlogger.bypass.commands</code> can use blocked commands while tagged.</li>
+<li>Everyone (<code>combatlogger.music</code>): <code>/combatmusic</code> (alias <code>/musica</code>) turns their combat music off or on.</li>
+<li><code>combatlogger.bypass</code> is never tagged; <code>combatlogger.bypass.commands</code> can use blocked commands while tagged; <code>combatlogger.bypass.safezone</code> can enter safe zones while tagged.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%combatlogger_in_combat%</code> and <code>%combatlogger_time_left%</code>.</p><h2>Requirements</h2><ul>
 <li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, and Folia, on the Java version your server already uses.</li>
-<li>Optional: Citizens (the body left behind), WorldGuard (no tagging in no-PvP regions), PlaceholderAPI (placeholders) and ParticleForge (an effect when a body is killed).</li>
+<li>Optional: Citizens (the body left behind), WorldGuard (no tagging in no-PvP regions, and the safe-zone wall around them), DominionForge (its spawn gets the wall too), PlaceholderAPI (placeholders) and ParticleForge (an effect when a body is killed).</li>
 </ul>
 <p>None of them is required. Without Citizens, tagging, the countdown and blocked commands still work and no body is spawned. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do the items drop when the body is killed?</strong><br>No, they drop when the player logs back in and is killed (with the <code>kill</code> penalty). That way the inventory can't drop twice.</p>
 <p><strong>Can players get stuck in combat at spawn?</strong><br>Not in WorldGuard regions with PvP denied, where no one is tagged. Staff can also clear a tag with <code>/combatlog clear</code>.</p>
+<p><strong>What if I don't want the wall, or the kill?</strong><br>Set <code>safe-zone.enabled: false</code> to turn it off, or <code>breach-penalty: teleport-back</code> to send a player who slips in back outside instead of killing them. A mob hit never locks spawn: only a tag from another player counts.</p>
 <p><strong>Can mob damage be left out?</strong><br>Yes. Set <code>pve-enabled: false</code> and only players tag each other.</p>
 <p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
 <p><strong>Does it work with TradeForge?</strong></p><p>Yes. A tagged player carries the <code>in-combat</code> marker TradeForge checks, so trades are refused mid-fight without any setup.</p><p></p>
