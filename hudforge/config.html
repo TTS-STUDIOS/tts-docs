@@ -57,10 +57,10 @@
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
 <li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
-<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li></ul>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li><li><a href='../hudforge/tablist-order-and-icons.html'>TAB order and small icons</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> HudForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>refresh-ticks</code>, <code>nametag-refresh-ticks</code>, <code>default-profile</code>, <code>metrics-id</code>, <code>resource-pack</code>, <code>images</code>, <code>components</code>, <code>animations</code>, <code>profiles</code>.</p><pre class='config'><code># HudForge — sidebar, tablist, nametags and bars, all in one file.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> HudForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>refresh-ticks</code>, <code>nametag-refresh-ticks</code>, <code>tablist-sort</code>, <code>default-profile</code>, <code>metrics-id</code>, <code>resource-pack</code>, <code>images</code>, <code>components</code>, <code>animations</code>, <code>profiles</code>.</p><pre class='config'><code># HudForge — sidebar, tablist, nametags and bars, all in one file.
 #
 # Everything you write here accepts:
 #   · Gradients         &lt;gradient:#C879FF:#7A4DFF&gt;TEXT&lt;/gradient&gt;
@@ -71,6 +71,9 @@
 #                       %hud_protocol%   (the CLIENT&#x27;s protocol through ViaVersion: 47 = 1.8)
 #   · Resource-pack logo &lt;lang_or:my.pack.key:TEXT&gt;   (pack players see the key&#x27;s glyph, the
 #                       rest see TEXT; old clients get the key: gate it on %hud_protocol%)
+#   · Small icons       &lt;sprite_or:items:item/diamond:&#x27;◆&#x27;&gt;   &lt;head_or:%hud_player%:&#x27;☺&#x27;&gt;
+#                       (the game&#x27;s own item sprites and player heads, 1.21.9+ clients and server;
+#                       older clients, which ViaVersion would hand a blank, get the quoted text)
 #   · Pictures          &lt;img:logo&gt;   (a .png from plugins/HudForge/images, sent to players as a
 #                       glyph of a pack this plugin builds; see resource-pack: below)
 #   · Rank values       %hud_prefix% %hud_suffix% %hud_group%   (LuckPerms, or any permissions
@@ -102,6 +105,19 @@ refresh-ticks: 4
 # rewritten immediately when someone joins, leaves or changes world, so 40 ticks (2 seconds) is
 # only the safety net for a prefix that changed on its own (a rank-up, a timed permission).
 nametag-refresh-ticks: 40
+
+# The order of the TAB list. Players with the same place are listed A-Z.
+#   by: weight   → LuckPerms group weight, highest first (owner 300 above vip 10). The player&#x27;s
+#                  heaviest group counts, inherited ones included.
+#   by: groups   → the order of `groups:` below; the first group in the list the player is in
+#                  decides, and anyone in none of them goes last. Works with any permissions
+#                  plugin behind Vault, and is the one to use when ranks of several game modes
+#                  share one LuckPerms database (list only this server&#x27;s ranks).
+#   by: profile  → each profile&#x27;s `weight:` (lower goes higher).
+#   by: off      → no order from HudForge: the list stays alphabetical.
+tablist-sort:
+  by: weight
+  groups: [owner, admin, mod, helper, builder, vip, default]
 
 default-profile: default
 
@@ -191,7 +207,7 @@ profiles:
     worlds: []
     permission: &quot;&quot;
     condition: &quot;&quot;
-    weight: 500                     # tablist order: lower goes higher up the list
+    weight: 500                     # tablist order with tablist-sort.by: profile (lower goes higher)
 
     sidebar:
       title: &quot;&lt;anim:diamond&gt; &lt;shine:#C879FF:#FFFFFF:1600&gt;&lt;bold&gt;TTS-STUDIO&lt;/bold&gt;&lt;/shine&gt; &lt;anim:diamond&gt;&quot;
@@ -261,7 +277,7 @@ profiles:
         style: NOTCHED_10
         progress: &quot;%hud_health%/20&quot;
         when: &quot;%hud_health%&lt;=6&quot;
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li><li><a href='tablist-order-and-icons.html'>TAB order and small icons</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

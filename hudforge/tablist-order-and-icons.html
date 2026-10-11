@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HudForge — TAB order and small icons · TTS-Studio docs</title>
+<meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li><li><a href='../hudforge/tablist-order-and-icons.html'>TAB order and small icons</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>TAB order and small icons</h1><h2 id="sorting-the-tab-list-by-rank">Sorting the TAB list by rank</h2>
+<p>Staff on top, then paid ranks, then everyone else, A-Z inside each rank. One section of
+<code>config.yml</code> decides it:</p>
+<pre><code class="language-yaml">tablist-sort:
+  by: weight            # weight | groups | profile | off
+  groups: [owner, admin, mod, helper, builder, vip, default]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><code>by:</code></th>
+<th>What decides the place</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>weight</code></td>
+<td>The player's heaviest LuckPerms group, inherited groups included. Higher weight goes higher: <code>owner</code> at 300 sits above <code>vip</code> at 10.</td>
+<td>LuckPerms with <code>setweight</code> on the groups</td>
+</tr>
+<tr>
+<td><code>groups</code></td>
+<td>The list under <code>groups:</code>. The first group in the list the player is in decides; a player in none of them goes last.</td>
+<td>LuckPerms, or any permissions plugin behind Vault</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>Each profile's <code>weight:</code> (lower goes higher). This was the only order before 1.3.0, and a config without <code>tablist-sort</code> keeps it.</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>HudForge writes no order: the list stays alphabetical.</td>
+<td>nothing</td>
+</tr>
+</tbody>
+</table>
+<p>Players who share a place are listed A-Z, ignoring capitals.</p>
+<h3 id="which-one-to-pick">Which one to pick</h3>
+<ul>
+<li>
+<p><strong>One server, one set of ranks:</strong> <code>weight</code>. Give each group a weight once
+(<code>/lp group admin setweight 200</code>) and the order follows from it.</p>
+</li>
+<li>
+<p><strong>A network whose game modes share one LuckPerms database</strong>, with ranks per mode (a <code>box_vip</code>
+and a <code>survival_dragon</code> that can both belong to the same player, given globally): <code>groups</code>, and
+on each server list only the ranks of that mode. With <code>weight</code>, a Survival rank would also
+place the player on Box.</p>
+</li>
+</ul>
+<pre><code class="language-yaml"># Box server
+tablist-sort:
+  by: groups
+  groups: [owner, admin, mod, builder, creator, box_immortal, box_elite, box_mvp, box_pro, box_vip, default]
+</code></pre>
+<p>The order is applied right away on join, world change and <code>/hud reload</code>, and checked again every
+<code>nametag-refresh-ticks</code> (2 seconds by default), so a rank bought while online moves the player up
+within two seconds.</p>
+<h3 id="how-it-works-and-what-else-can-break-it">How it works, and what else can break it</h3>
+<p>The game sorts the TAB by scoreboard team name. HudForge puts each player in a team whose name
+starts with a three-digit key (<code>000</code> = top), written into every online player's scoreboard. Two
+consequences:</p>
+<ul>
+<li>
+<p>Another plugin that also puts players in teams (another TAB plugin, a nametag plugin, some
+minigames) fights over the same thing. Run one of them.</p>
+</li>
+<li>
+<p>Spectators always go to the bottom: the game does that before looking at teams.</p>
+</li>
+</ul>
+<h2 id="small-icons-sprite_or-and-head_or">Small icons: <code>&lt;sprite_or&gt;</code> and <code>&lt;head_or&gt;</code></h2>
+<p>1.21.9 added two text objects the game draws inline: any sprite of its atlases
+(<code>&lt;sprite:items:item/diamond&gt;</code>) and a player's face (<code>&lt;head:Notch&gt;</code>). No resource pack needed.</p>
+<p><strong>Clients older than 1.21.9 cannot draw them.</strong> On a server that lets older versions in with
+ViaVersion, ViaBackwards and ViaRewind, the icon reaches them as an empty text: no garbage, but a
+gap in the line. We checked what arrives with bots on 1.21.11, 1.21.4, 1.20.4 and 1.8.9:</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th><code>&lt;sprite:items:item/diamond&gt;</code></th>
+<th><code>&lt;sprite_or:items:item/diamond:''&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.21.9 and later</td>
+<td>the diamond</td>
+<td>the diamond</td>
+</tr>
+<tr>
+<td>1.21.4, 1.20.4</td>
+<td>nothing (<code>"SPRITE END"</code>)</td>
+<td>``</td>
+</tr>
+<tr>
+<td>1.8.9</td>
+<td>nothing</td>
+<td>``</td>
+</tr>
+</tbody>
+</table>
+<p>So write the <code>_or</code> form, with the text older clients should see last:</p>
+<pre><code class="language-yaml">lines:
+  - &quot;&lt;sprite_or:items:item/diamond:'&lt;aqua&gt;◆'&gt; &lt;white&gt;Gems: %gems%&quot;
+  - &quot;&lt;head_or:%hud_player%:'☺'&gt; &lt;white&gt;%hud_player%&quot;
+nametag:
+  prefix: &quot;&lt;sprite_or:items:item/emerald:'*'&gt;%hud_prefix%&quot;
+</code></pre>
+<ul>
+<li>The atlas can be left out: <code>&lt;sprite_or:item/diamond:''&gt;</code> uses the item and block atlas.</li>
+<li>
+<p>The text may carry colours and spaces when it is in single quotes; without quotes it ends at
+the next <code>:</code> or <code>&gt;</code>.</p>
+</li>
+<li>
+<p>The choice is made <strong>per viewer</strong> in the sidebar, the TAB header and footer, the boss bars,
+the action bar and the nametag prefix and suffix: a 1.8 player looking at a 1.21.11 player's
+nametag gets the text, the 1.21.11 player next to them the icon.</p>
+</li>
+<li>
+<p><code>tablist.name</code> is the exception: the game sends one list name to everyone, so there it is
+decided by the listed player's own client. Keep icons out of <code>tablist.name</code> on a mixed-version
+server, or put them in <code>nametag.prefix</code>, which also shows in the TAB.</p>
+</li>
+<li>
+<p>Server side, icons are only sent from Paper 1.21.9 or newer. On older servers and on Spigot
+every viewer gets the text.</p>
+</li>
+</ul>
+<p>To show something else entirely to old clients, gate on the client's protocol, which
+<code>%hud_protocol%</code> gives through ViaVersion (773 = 1.21.9, 393 = 1.13, 47 = 1.8):</p>
+<pre><code class="language-yaml">- text: &quot;&lt;white&gt;Your stats, now with icons&quot;
+  when: &quot;%hud_protocol%&gt;=773&quot;
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
