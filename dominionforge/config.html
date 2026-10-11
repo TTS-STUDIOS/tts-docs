@@ -89,7 +89,8 @@ license-key: &quot;&quot;
 # -- Storage ---------------------------------------------------------------
 # sqlite : a single file in plugins/DominionForge/data.db. The right answer for
 #          one server.
-# mysql  : external, required for cross-server setups or very large networks.
+# mysql  : external MySQL or MariaDB (`mariadb` is accepted too), for very large
+#          servers. One server per database. Any other value stops the plugin.
 database:
   type: sqlite
 
@@ -143,7 +144,8 @@ aliases:
 
 # ── Claims ───────────────────────────────────────────────────────────
 claims:
-  # Extra power for claiming a chunk with no neighbour of your own. Without
+  # Extra power for every chunk with no neighbour of your own (an outpost),
+  # counted against the claim limit for as long as it stays an outpost. Without
   # this, a faction sprinkles single chunks across the map to block everyone.
   outpost_cost_extra: 5.0
   # Cap for /df claimradius. Hard cap in code: 10 (441 chunks).
@@ -240,6 +242,8 @@ ranks:
 members:
   # Most members a faction may have. 0 = no limit. The members upgrade adds to it.
   max: 0
+  # Most alts (/df alt) per faction; alts never count toward `max`. -1 = no limit.
+  max_alts: 5
 
 # ── Flight ───────────────────────────────────────────────────────────
 # /df fly: flight inside your own land. It ends on leaving the land, on being
@@ -258,6 +262,11 @@ fly:
 points:
   war_win: 50       # to the faction that wins a war
   war_loss: 25      # taken from the faction that loses one (never below 0)
+  # War points only for a war that was fought: the attackers stood on the
+  # objective at least once. Stops throwaway factions declaring and idling.
+  war_requires_siege: true
+  # The same two factions pay war points at most once in this many hours (0 = no limit).
+  war_pair_cooldown_hours: 24
   koth_win: 30      # to the faction of whoever captures a KOTH
 
 # ── Missions ─────────────────────────────────────────────────────────
@@ -486,6 +495,9 @@ bank: {}
 warps:
   # Warps per faction. A server with unlimited warps has no geography.
   max_per_faction: 5
+  # If true, a warp can only be set inside your own territory, and a warp whose
+  # land is no longer yours is deleted the next time someone uses it.
+  require_own_claim: true
 
 home:
   # If true, /df sethome only works inside your own territory.
