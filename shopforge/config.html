@@ -27,7 +27,7 @@
 <li><a class='' href='../questforge/index.html'>QuestForge</a>
 </li>
 <li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
-<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li><li><a href='../shopforge/traders.html'>‍ Traders and named items</a></li></ul>
 </li>
 <li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
 </li>
@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ShopForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>chat-prefix</code>, <code>license-key</code>, <code>shop</code>, <code>dynamic-pricing</code>, <code>stock-refill-task-interval-minutes</code>, <code>confirm-gui-threshold</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ShopForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>chat-prefix</code>, <code>license-key</code>, <code>shop</code>, <code>dynamic-pricing</code>, <code>stock-refill-task-interval-minutes</code>, <code>confirm-gui-threshold</code>, <code>sell-hand-confirm</code>.</p><pre class='config'><code># =============================================================================
 #                        ShopForge — main configuration
 # =============================================================================
 # Edit this file then run /shop reload (or restart the server) to apply.
@@ -169,7 +169,13 @@ stock-refill-task-interval-minutes: 5
 # Set to 0 to disable confirmation entirely.
 # Default: 64 (one full stack)
 confirm-gui-threshold: 64
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
+
+# /sell hand first shows the held stack, how many and the total, with Sell and
+# Cancel buttons, so nobody sells their gear by accident (a shop NPC that runs
+# /sell hand gets the same screen). false = sell straight away, as before 1.12.0.
+# Default: true
+sell-hand-confirm: true
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li><li><a href='traders.html'>‍ Traders and named items</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

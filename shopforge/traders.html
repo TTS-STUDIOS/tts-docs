@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopForge — ‍ Traders and named items · TTS-Studio docs</title>
+<meta name="description" content="Shops you edit and reload with players online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li><li><a href='../shopforge/traders.html'>‍ Traders and named items</a></li></ul>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>‍ Traders and named items</h1><p>A <strong>trader</strong> opens the real villager window. Each trade takes one or two items and gives one:
+heads for a pickaxe, coins for a pouch, four keys for a better key. <strong>Named items</strong> describe an
+item once, so trades and shops can point at it.</p>
+<h2 id="named-items-itemsyml">Named items (<code>items/*.yml</code>)</h2>
+<pre><code class="language-yaml"># items/box.yml
+items:
+  ancient_coin:
+    material: GOLD_NUGGET
+    display-name: &quot;&lt;gradient:#F5D27A:#C8902E&gt;Ancient Coin&lt;/gradient&gt;&quot;
+    lore:
+      - &quot;&lt;gray&gt;Dug out of old ruins.&quot;
+    glint: true
+    custom-data: {myserver: ancient_coin}   # the mark it is recognised by
+
+  ruby_sword:
+    material: DIAMOND_SWORD
+    display-name: &quot;&lt;gradient:#ff3b3b:#7a0000&gt;[⚔] Ruby Sword [⚔]&lt;/gradient&gt;&quot;
+    enchants: {sharpness: 3}
+    unbreakable: true
+    custom-model-data: 7509
+    flags: [HIDE_UNBREAKABLE]
+    custom-data: {myserver: ruby_sword}
+
+  ruby_helmet:
+    material: DIAMOND_HELMET
+    trim: {pattern: rib, material: redstone}
+    enchants: {protection: 2}
+    custom-data: {myserver: ruby_helmet}
+
+  rockets:
+    material: FIREWORK_ROCKET
+    amount: 16                              # a shop sells 16 per purchase
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>material</code></td>
+<td>The vanilla item (required)</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>How many make one unit (a trade result, one purchase in a shop)</td>
+</tr>
+<tr>
+<td><code>display-name</code>, <code>lore</code></td>
+<td>MiniMessage; not italic unless you ask for it</td>
+</tr>
+<tr>
+<td><code>enchants</code></td>
+<td>Any level, <code>{sharpness: 6}</code> included</td>
+</tr>
+<tr>
+<td><code>unbreakable</code>, <code>glint</code></td>
+<td><code>true</code> / <code>false</code></td>
+</tr>
+<tr>
+<td><code>custom-model-data</code></td>
+<td>For resource packs; the item still looks like its material without the pack</td>
+</tr>
+<tr>
+<td><code>trim</code></td>
+<td>Armour trim, <code>{pattern: rib, material: redstone}</code> (1.20+)</td>
+</tr>
+<tr>
+<td><code>skull-texture</code></td>
+<td>Head texture (the base64 value or a textures.minecraft.net URL)</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><code>#RRGGBB</code> for leather armour</td>
+</tr>
+<tr>
+<td><code>flags</code></td>
+<td>Item flags (<code>HIDE_ENCHANTS</code>, <code>HIDE_UNBREAKABLE</code>…)</td>
+</tr>
+<tr>
+<td><code>custom-data</code></td>
+<td>Entries of the item's own <code>custom_data</code>: <strong>the mark</strong></td>
+</tr>
+<tr>
+<td><code>pdc</code></td>
+<td>Bukkit container entries, <code>{"plugin:key": value}</code>: also a mark</td>
+</tr>
+</tbody>
+</table>
+<h3 id="marks">Marks</h3>
+<p>An item with <code>custom-data</code> (or <code>pdc</code>) is recognised <strong>by that mark alone</strong>, never by its name,
+lore or texture. Reword the description later and the items players already hold still count.
+<code>custom-data</code> is the same <code>custom_data</code> a datapack or a <code>/give</code> writes:</p>
+<pre><code>/give @p player_head[custom_data={myserver:&quot;ancient_coin&quot;}]
+</code></pre>
+<p>So a datapack can drop the coins and ShopForge takes them. <code>/shop inspect</code> shows the mark of the
+item in your hand and which named item it matches. An item with no mark only pays when it is
+identical to the one described.</p>
+<h2 id="traders-shopsidyml-with-type-trader">‍ Traders (<code>shops/&lt;id&gt;.yml</code> with <code>type: trader</code>)</h2>
+<pre><code class="language-yaml">id: wandering-trader
+type: trader
+display-name: &quot;&lt;gradient:#7FD1AE:#3E8E6E&gt;Wandering Trader&quot;   # window title
+npc-only: false          # true: only from its NPC or /shop open
+# permission: myserver.trader   # optional, for the whole trader
+
+trades:
+  - id: pouch
+    cost: [{item: ancient_coin, amount: 64}]
+    result: {item: coin_pouch}
+
+  - id: boots              # two costs: the window has two slots
+    cost: [{item: coin_pouch, amount: 1}, {item: ancient_coin, amount: 16}]
+    result: {item: wayfarer_boots}
+
+  - id: emeralds           # an item written in place
+    cost: [{item: ancient_coin, amount: 8}]
+    result: {material: EMERALD, amount: 3}
+
+  - id: better_key         # CrateForge keys
+    cost: [{crateforge-key: vote, amount: 4}]
+    result: {crateforge-key: rare}
+    # permission: myserver.vip   # optional, per trade (hidden without it)
+</code></pre>
+<ul>
+<li>
+<p>A cost or a result is <code>item: &lt;named item&gt;</code>, <code>crateforge-key: &lt;key id&gt;</code> or an item written in place
+with the fields above. A cost's <code>amount</code> must fit in one slot (1-64, 1 for tools).</p>
+</li>
+<li>
+<p><strong>CrateForge keys</strong> are recognised by CrateForge's own mark and handed out exactly as CrateForge
+makes them (they stack with keys from <code>/cf givekey</code>).</p>
+</li>
+<li>
+<p><strong>Opening:</strong> <code>/shop &lt;id&gt;</code>, a Citizens NPC (select it, then <code>/shop npc &lt;id&gt;</code>), or
+<code>/shop open &lt;player&gt; &lt;id&gt;</code> from the console, a menu or an NPC command.</p>
+</li>
+<li>
+<p><strong>Picking a trade</strong> in the list moves the right items from the inventory into the slots.</p>
+</li>
+</ul>
+<h3 id="safe-by-design">Safe by design</h3>
+<p>The window only shows the trades. What pays and what comes out is decided on the server by the
+marks: every click on the result slot is handled by ShopForge, so shift-click, drag, double-click,
+number and drop keys cannot copy the result, and nothing is charged when the result has nowhere
+to go (shift-click with a full inventory says so). A one-item trade wants the other slot empty, as in
+vanilla.</p>
+<h2 id="named-items-in-shops">Named items in shops</h2>
+<pre><code class="language-yaml">      - id: ancient_coin
+        item: ancient_coin       # shows it and only buys items carrying its mark
+        sell-price: 12
+      - id: rockets
+        item: rockets            # amount 16 in items/: one purchase = 16 rockets
+        buy-price: 400
+</code></pre>
+<p><code>/sell hand</code> and <code>/sell all</code> sell them like any other entry. An entry with a plain <code>material</code>
+<strong>never buys an item that carries a named item's mark</strong>: a Ruby Sword is not sold as a diamond sword.
+Sell prices are per item.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
