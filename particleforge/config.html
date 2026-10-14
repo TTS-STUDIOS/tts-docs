@@ -49,7 +49,7 @@
 <li><a class='' href='../safertp/index.html'>SafeRTP</a>
 </li>
 <li><a class=' activo' href='../particleforge/index.html'>ParticleForge</a>
-<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li><li><a href='../particleforge/bundled-effects.html'>Bundled effects</a></li><li><a href='../particleforge/developer-api.html'>Developer API</a></li><li><a href='../particleforge/placed-effects.html'>Placed effects</a></li><li><a href='../particleforge/writing-effects.html'>Writing effects</a></li></ul>
+<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li><li><a href='../particleforge/auras.html'>Worn auras</a></li><li><a href='../particleforge/bundled-effects.html'>Bundled effects</a></li><li><a href='../particleforge/developer-api.html'>Developer API</a></li><li><a href='../particleforge/placed-effects.html'>Placed effects</a></li><li><a href='../particleforge/writing-effects.html'>Writing effects</a></li></ul>
 </li>
 <li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
 </li>
@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ParticleForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>debug</code>, <code>budget</code>, <code>lod</code>, <code>lod-multipliers</code>, <code>lang</code>.</p><pre class='config'><code>debug: false
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ParticleForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>debug</code>, <code>budget</code>, <code>lod</code>, <code>lod-multipliers</code>, <code>auras</code>, <code>lang</code>.</p><pre class='config'><code>debug: false
 
 budget:
   global-max-active-effects: 64
@@ -78,10 +78,18 @@ lod-multipliers:
   mid: 0.5
   far: 0.2
 
+# Worn auras (1.7.0): a player with the permission carries the effect while online (hidden in spectator or
+# when invisible). First matching entry wins. Give the permission with your permissions plugin, e.g.
+# /lp user &lt;player&gt; permission set particleforge.aura.dragon true
+auras:
+  - id: dragon
+    effect: cosmetics/dragon-aura
+    permission: particleforge.aura.dragon
+
 # Translation overlay to apply on top of messages.yml.
 # Supported: en, es. Defaults to en.
 lang: en
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='auras.html'>Worn auras</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

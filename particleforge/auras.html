@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParticleForge — Worn auras · TTS-Studio docs</title>
+<meta name="description" content="Effects you compose in a file, not in Java">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class=' activo' href='../particleforge/index.html'>ParticleForge</a>
+<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li><li><a href='../particleforge/auras.html'>Worn auras</a></li><li><a href='../particleforge/bundled-effects.html'>Bundled effects</a></li><li><a href='../particleforge/developer-api.html'>Developer API</a></li><li><a href='../particleforge/placed-effects.html'>Placed effects</a></li><li><a href='../particleforge/writing-effects.html'>Writing effects</a></li></ul>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Worn auras</h1><p>Since 1.7.0 an aura is an effect a player <strong>wears</strong>: whoever has its permission carries it while online. It
+follows the player, restarts on its own when it ends and hides in spectator mode or while the player is
+invisible. Use it for rank or subscription perks.</p>
+<pre><code class="language-yaml"># config.yml
+auras:
+  - id: dragon
+    effect: cosmetics/dragon-aura          # any effect from /pf list
+    permission: particleforge.aura.dragon
+</code></pre>
+<ul>
+<li><strong>First matching entry wins</strong>: list the most exclusive aura first.</li>
+<li>
+<p>Aura permissions are <strong>nobody's by default</strong>, not even ops'. Give them with your permissions plugin:
+<code>/lp user &lt;player&gt; permission set particleforge.aura.dragon true</code> (or to a group).</p>
+</li>
+<li>
+<p><code>/pf reload</code> re-reads the list.</p>
+</li>
+<li>
+<p>Bundled example: <code>cosmetics/dragon-aura</code> (violet flame rising around the player, gold sparks at the feet).
+On a server that already has an <code>effects/</code> folder, copy <code>effects/cosmetics/dragon-aura.yml</code> from the jar:
+bundled effects are only extracted into an empty folder.</p>
+</li>
+<li>
+<p>Every aura counts against the per-player effect budget (<code>budget.per-player-max-active-effects</code>).</p>
+</li>
+</ul><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

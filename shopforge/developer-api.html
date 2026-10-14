@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopForge — Developer API · TTS-Studio docs</title>
+<meta name="description" content="Shops you edit and reload with players online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/developer-api.html'>Developer API</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li><li><a href='../shopforge/traders.html'>‍ Traders and named items</a></li></ul>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Developer API</h1><p>Other plugins can change what a sale pays: sell boosters, events, rank perks. Add <code>softdepend: [ShopForge]</code>
+to your <code>plugin.yml</code>.</p>
+<h2 id="sell-event">Sell event</h2>
+<p>Since 1.15.0 ShopForge fires <code>com.ttsstudio.shopforge.api.ShopSellEvent</code> on the main thread right before it pays
+a player for items sold to a shop: from the shop menu, <code>/sell hand</code> and <code>/sell all</code>. The items are already counted
+when the event fires. With no plugin listening, every sale pays what it always paid.</p>
+<pre><code class="language-java">import com.ttsstudio.shopforge.api.ShopSellEvent;
+
+@EventHandler
+public void onSell(ShopSellEvent e) {
+    if (boosterActive) e.multiply(2);      // x2 sell booster
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it gives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getPlayer()</code></td>
+<td>The player who sells.</td>
+</tr>
+<tr>
+<td><code>getShopId()</code> / <code>getItemId()</code></td>
+<td>The shop and the shop entry being sold.</td>
+</tr>
+<tr>
+<td><code>getAmount()</code></td>
+<td>How many items.</td>
+</tr>
+<tr>
+<td><code>getCurrency()</code></td>
+<td>Currency of the entry (<code>""</code> or <code>vault</code> = the server economy).</td>
+</tr>
+<tr>
+<td><code>getBasePayout()</code></td>
+<td>What the shop would pay with no listener.</td>
+</tr>
+<tr>
+<td><code>getPayout()</code></td>
+<td>The payout so far, after earlier listeners.</td>
+</tr>
+<tr>
+<td><code>setPayout(double)</code></td>
+<td>Sets the payout. It never goes below 0.</td>
+</tr>
+<tr>
+<td><code>multiply(double)</code></td>
+<td>Multiplies the current payout.</td>
+</tr>
+</tbody>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li><li><a href='traders.html'>‍ Traders and named items</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
