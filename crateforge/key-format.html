@@ -76,6 +76,10 @@ material: TRIPWIRE_HOOK
 # Apply a glowing enchantment effect to the key item
 glow: true
 
+# Resource pack look (1.8.3, both optional)
+custom-model-data: 7804                  # number your pack maps on the material
+# item-model: &quot;mypack:legendary_key&quot;     # 1.21.4+; clients without the pack see a missing model
+
 # ─────────────────────────────────────────────────
 # OBTAIN METHODS — how players can get this key
 # ─────────────────────────────────────────────────
@@ -129,6 +133,18 @@ obtain-methods:
 <td>Boolean</td>
 <td>No</td>
 <td>Apply enchantment glow effect (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td><code>custom-model-data</code></td>
+<td>Integer</td>
+<td>No</td>
+<td>Resource pack model number on <code>material</code> (1.8.3). Without the pack the plain material shows</td>
+</tr>
+<tr>
+<td><code>item-model</code></td>
+<td>String</td>
+<td>No</td>
+<td>1.21.4+ item model id (<code>namespace:path</code>, 1.8.3). Ignored on older servers. Prefer <code>custom-model-data</code> if some players may not have the pack</td>
 </tr>
 <tr>
 <td><code>obtain-methods</code></td>
@@ -234,6 +250,7 @@ obtain-methods:
 <blockquote>
 <p><strong>Tip:</strong> Set <code>glow: true</code> on rare keys to make them visually distinct from common ones in players' inventories.</p>
 <p><strong>Tip:</strong> Use different materials for different key tiers (e.g., IRON_INGOT for common, GOLD_INGOT for rare, NETHER_STAR for legendary) to make keys immediately recognizable.</p>
+<p><strong>Note:</strong> Keys handed out before you set <code>custom-model-data</code> / <code>item-model</code> get the new look the next time their owner joins.</p>
 <p><strong>Note:</strong> Keys are validated by PDC when a player tries to open a crate — changing the key's material after distribution will not invalidate existing keys.</p>
 </blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
