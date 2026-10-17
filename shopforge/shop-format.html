@@ -120,6 +120,37 @@ categories:
 </code></pre>
 <p>Items can also be written as a map keyed by id (<code>diamond_sword:</code> instead of <code>- id: diamond_sword</code>);
 both load the same.</p>
+<h2 id="open-a-shop-on-a-category">Open a shop on a category</h2>
+<p>The category id is the key under <code>categories:</code> (<code>swords</code>, <code>armor</code> and <code>special</code> in the file above). It
+can be typed in any case. The other tabs stay visible, so the player can still switch.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Who</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/shop &lt;shop&gt; &lt;category&gt;</code></td>
+<td>Players</td>
+<td>Opens the shop on that category</td>
+</tr>
+<tr>
+<td><code>/shop open &lt;player&gt; &lt;shop&gt; [category]</code></td>
+<td>Console, menus, NPC commands</td>
+<td>Opens it for a player on that category</td>
+</tr>
+<tr>
+<td><code>/shop npc &lt;shop&gt; [category]</code></td>
+<td>Staff</td>
+<td>Binds the selected Citizens NPC to the shop and category, so each villager opens its own page</td>
+</tr>
+</tbody>
+</table>
+<p>Tab completion suggests the category ids. If the category does not exist, the player gets a short
+message once and the shop opens as usual.</p>
 <h2 id="item-field-reference">Item field reference</h2>
 <table>
 <thead>
