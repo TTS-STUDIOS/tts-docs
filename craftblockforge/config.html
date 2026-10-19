@@ -65,6 +65,10 @@
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CraftBlockForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CraftBlockForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>settings</code>, <code>stations</code>, <code>message</code>, <code>worlds</code>, <code>regions</code>.</p><pre class='config'><code># CraftBlockForge — config.yml
 # Item names are Bukkit material names (DIAMOND_SWORD, TNT...).
 # Wildcards work in every list: * = any text, ? = one character (e.g. &quot;*_SWORD&quot;, &quot;NETHERITE_*&quot;).
+# Items from other plugins go by their id with a prefix: &quot;itemsadder:myitems:ruby&quot;, &quot;oraxen:ruby_sword&quot;,
+# &quot;nexo:ruby_sword&quot;, &quot;executableitems:ruby&quot;, &quot;mmoitems:SWORD:RUBY&quot;, or &quot;pdc:&lt;namespace:key&gt;=&lt;value&gt;&quot; for any
+# plugin that tags its items. &quot;/craftblock block hand&quot; adds the item you hold, by its id when it has one.
+# A material entry (DIAMOND_SWORD) also covers custom items made from that material.
 
 settings:
   # blacklist = block the listed items | whitelist = block everything except the listed items
