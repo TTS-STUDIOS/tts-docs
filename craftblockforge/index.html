@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CraftBlockForge — CraftBlockForge · TTS-Studio docs</title>
+<meta name="description" content="Decide what players can craft, and where">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+<li><a class=' activo' href='../craftblockforge/index.html'>CraftBlockForge</a>
+<ul class='nav-sub'><li><a href='../craftblockforge/commands.html'>Commands and permissions</a></li><li><a href='../craftblockforge/config.html'>Configuration reference</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CraftBlockForge</a></p><h1>CraftBlockForge</h1><p class='linea'>Decide what players can craft, and where</p><p class='entradilla'>CraftBlockForge stops players from crafting the items you choose. Block them on the whole server, in one world, or inside WorldGuard regions, and change the lists in game without restarting.</p>
+<h2>Features</h2><ul>
+<li><strong>Blocked items look blocked.</strong> The result slot shows a barrier named "Blocked" before the player clicks, so nobody wastes materials guessing. You can also hide the slot, or keep the old behaviour (<code>settings.preview</code>).</li>
+<li><strong>Every station, not only the crafting table.</strong> The smithing table and the stonecutter follow the same lists. Furnaces, smokers, blast furnaces and the anvil can too (<code>stations</code>).</li>
+<li><strong>Blacklist or whitelist, per world.</strong> Block a few items, or block everything except a few.</li>
+<li><strong>Wildcards.</strong> <code>*_SWORD</code> blocks every sword, <code>NETHERITE_*</code> every netherite item, <code>?</code> matches one character.</li>
+<li><strong>WorldGuard regions.</strong> Give a region its own blacklist or whitelist in config.yml, or use the region flags <code>deny-craft</code>, <code>deny-craft-items</code> and <code>allow-craft-items</code>.</li>
+<li><strong>In-game menu.</strong> <code>/craftblock gui [world]</code> shows the list of that world: the blocked items, or the allowed ones in a whitelist world. Click one to take it off the list, or add the item in your hand.</li>
+<li><strong>Your own message.</strong> Chat, action bar or title, with a sound and a cooldown. <code>&amp;</code> colour codes and MiniMessage (hex colours, gradients) both work, and one item in one world can have its own message.</li>
+<li><strong>Bypass permissions</strong> for everything, for one world, for one region or for one item.</li>
+<li><strong>Staff alerts and logging</strong> when someone tries to craft a blocked item.</li>
+<li><strong>Stats</strong> of blocked attempts per player and for the whole server.</li>
+<li><strong>PlaceholderAPI</strong>: <code>%craftblockforge_...%</code> (the old <code>%dib_...%</code> still work).</li>
+<li><strong>Developer API</strong>: check if an item is blocked, or listen to the cancellable <code>CraftBlockedEvent</code>.</li>
+</ul><h2>Requirements</h2><ul>
+<li>Spigot or Paper from 1.17 to 26.x, forks like Purpur included, and Folia.</li>
+<li>Optional: WorldGuard (regions) and PlaceholderAPI (placeholders).</li>
+</ul><h2>Placeholders</h2><p><code>%craftblockforge_enabled%</code>, <code>%craftblockforge_mode%</code>, <code>%craftblockforge_total_blocked%</code>, <code>%craftblockforge_top_item%</code>, <code>%craftblockforge_top_item_count%</code>, <code>%craftblockforge_last_world%</code>, <code>%craftblockforge_last_region%</code>, <code>%craftblockforge_time_since_last%</code>, <code>%craftblockforge_wg_available%</code>, <code>%craftblockforge_global_total%</code>.</p><h2>Download</h2><p>CraftBlockForge is free on <a href="https://www.spigotmc.org/resources/113787/">SpigotMC</a>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

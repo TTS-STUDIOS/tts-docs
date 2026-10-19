@@ -59,6 +59,8 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>safe-zone</code>, <code>notifications</code>, <code>combat-music</code>.</p><pre class='config'><code># ============================================================
 # CombatLogger — config.yml
@@ -97,6 +99,8 @@ combat:
   restrictions-pvp-only: true # Flight and elytra limits only after a hit from another player, not from mobs.
   pearl-cooldown-seconds: 0 # Ender pearl cooldown while tagged, in seconds (0 = vanilla 1 s).
   untag-on-enemy-death: true  # When the last player who hit you dies, your tag ends.
+  block-teleport: true      # Refuse teleports from commands and other plugins (warp/home menus) while tagged. Pearls and portals still work.
+  exempt-kicks: true        # A player kicked by staff, or a server shutting down, is not a combat log.
 
 # ============================================================
 # COMBAT HUD  (v1.1.0)
@@ -113,6 +117,7 @@ combat-hud:
   exit-actionbar: &quot;&lt;green&gt;✓ Out of combat&lt;/green&gt;&quot;
 
 npc:
+  without-citizens: kill    # No Citizens installed: kill = the player dies where they logged out (items drop there) | none = only counted
   duration-seconds: 30      # How long the Citizens ghost lingers after disconnect.
   hologram-text: &quot;&lt;red&gt;[Combat Logger] &lt;name&gt;&quot;
   death-broadcast: &quot;&lt;gold&gt;&lt;player&gt;&lt;/gold&gt; &lt;red&gt;was killed while logged out!&quot;
