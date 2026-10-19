@@ -92,6 +92,11 @@ combat:
     - sethome      # SmartHomes
     - trade        # TradeForge
     - shop         # ShopForge
+  disable-flight: true      # Take away flight (/fly) when tagged and give it back when the tag ends. Creative and spectator are left alone.
+  disable-elytra: true      # No elytra gliding while tagged.
+  restrictions-pvp-only: true # Flight and elytra limits only after a hit from another player, not from mobs.
+  pearl-cooldown-seconds: 0 # Ender pearl cooldown while tagged, in seconds (0 = vanilla 1 s).
+  untag-on-enemy-death: true  # When the last player who hit you dies, your tag ends.
 
 # ============================================================
 # COMBAT HUD  (v1.1.0)
