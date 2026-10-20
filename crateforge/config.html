@@ -62,7 +62,7 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>shop</code>, <code>mass-open</code>, <code>left-click-preview</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>shop</code>, <code>mass-open</code>, <code>left-click-preview</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>body</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
 # CrateForge — main configuration
 # ----------------------------------------------------------------------------
 # Free crate plugin for Paper and Spigot 1.19.4+. Every option below is annotated.
@@ -166,6 +166,19 @@ ambient:
     points: 3              # Particles emitted per refresh.
     particleforge-effect: &quot;&quot;   # Optional ParticleForge effect id, replaces the ring above.
                                # Example: crate/legendary-win. Empty = built-in ring.
+
+# ===== Crate bodies (1.10.0) ================================================
+# A crate can wear its own resource-pack model over the block (a crate file&#x27;s
+# `body:` section, see crates/legendary.yml). The block underneath stays a
+# plain chest and keeps handling the clicks. Only players who can draw the model
+# receive it; everyone else just sees the block, never a missing-model cube.
+body:
+  enabled: true
+  require-pack: true       # Show it only to players who have the server&#x27;s resource pack loaded.
+  min-protocol: 769        # Lowest client version (769 = 1.21.4). Needs ViaVersion to tell clients apart;
+                           # without it the client is assumed to match the server.
+  open-reach: 8.0          # Blocks: an opener within this range sees the body switch to its open model.
+  open-max-ticks: 400      # Failsafe: an open body closes by itself after this long.
 
 # ===== Visual hooks =========================================================
 # Optional cosmetic integrations. Each is opt-in even when the plugin is

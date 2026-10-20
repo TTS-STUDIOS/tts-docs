@@ -59,8 +59,10 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ChattyChannels writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>server-name</code>, <code>mysql</code>, <code>logging</code>, <code>friends</code>, <code>config-version</code>.</p><pre class='config'><code>﻿# ChattyChannels configuration
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ChattyChannels writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>server-name</code>, <code>mysql</code>, <code>logging</code>, <code>friends</code>, <code>rank-preview</code>, <code>config-version</code>.</p><pre class='config'><code>﻿# ChattyChannels configuration
 # Main plugin settings are in channels.yml
 
 # Active language. ISO-639-1 two-letter code (lowercase).
@@ -90,7 +92,26 @@ friends:
   request-ttl-days: 7
   notify-on-join: true
 
-config-version: 2
+# Rank preview: now and then a private chat line shows the player&#x27;s name with the NEXT rank of this server
+# (price in the server currency with an optional real-money equivalent, click opens the shop). Off by default; /avisos rangos off turns it off per player.
+# Example table; set url (shop link, empty = no link), hook and ranks for your own server.
+rank-preview:
+  enabled: false
+  first-delay-minutes: 10        # never in the first minutes after joining
+  interval-minutes: 30           # between two lines for the same player
+  pause-after-purchase-days: 7   # silence after the player buys a rank
+  exempt-permission: chatchannels.rankpreview.exempt   # staff never gets it
+  combat-placeholder: &quot;%combatlogger_in_combat%&quot;       # PlaceholderAPI value &quot;true&quot; = in combat, nothing is sent
+  url: &quot;&quot;                        # shop link shown under the line; empty = no link
+  hook: &quot;plus more perks&quot;        # one short phrase after the preview
+  ranks:
+    - { group: box_vip, name: &quot;VIP&quot;, color: &quot;#6FCF7E&quot;, price: 500, eur: &quot;4,99 €&quot; }
+    - { group: box_pro, name: &quot;Pro&quot;, color: &quot;#4FC3F7&quot;, price: 1100, eur: &quot;9,99 €&quot; }
+    - { group: box_mvp, name: &quot;MVP&quot;, color: &quot;#F2C14E&quot;, price: 2400, eur: &quot;19,99 €&quot; }
+    - { group: box_elite, name: &quot;Elite&quot;, color: &quot;#FF8A3D&quot;, price: 3500, eur: &quot;29,98 €&quot; }
+    - { group: box_immortal, name: &quot;Immortal&quot;, color: &quot;#E0533D&quot;, price: 6500, eur: &quot;49,99 €&quot; }
+
+config-version: 3
 </code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='channel-formats.html'>Channel formats</a></li><li><a href='moderation-filters.html'>Moderation filters</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>

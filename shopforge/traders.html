@@ -59,6 +59,8 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>‍ Traders and named items</h1><p>A <strong>trader</strong> opens the real villager window. Each trade takes one or two items and gives one:
 heads for a pickaxe, coins for a pouch, four keys for a better key. <strong>Named items</strong> describe an
@@ -149,8 +151,40 @@ items:
 <td><code>pdc</code></td>
 <td>Bukkit container entries, <code>{"plugin:key": value}</code>: also a mark</td>
 </tr>
+<tr>
+<td><code>attributes</code></td>
+<td>Attribute modifiers, see below (1.17+ servers; the armor of an elytra, extra speed...)</td>
+</tr>
 </tbody>
 </table>
+<h3 id="attributes">Attributes</h3>
+<pre><code class="language-yaml">  kit_elytra:
+    material: ELYTRA
+    attributes:
+      - {attribute: armor, amount: 5, operation: add_value, slot: chest}
+      - {attribute: armor_toughness, amount: 1, slot: chest}
+    flags: [HIDE_ATTRIBUTES]
+</code></pre>
+<ul>
+<li>
+<p><code>attribute</code>: <code>armor</code>, <code>armor_toughness</code>, <code>knockback_resistance</code>, <code>max_health</code>, <code>attack_damage</code>,
+<code>attack_speed</code>, <code>movement_speed</code>... (no prefix; <code>minecraft:</code> and <code>generic.</code> are accepted).</p>
+</li>
+<li>
+<p><code>operation</code>: <code>add_value</code> (default), <code>add_multiplied_base</code> or <code>add_multiplied_total</code>.</p>
+</li>
+<li><code>slot</code>: <code>head</code>, <code>chest</code>, <code>legs</code>, <code>feet</code>, <code>hand</code>, <code>mainhand</code>, <code>offhand</code>, <code>armor</code> or <code>any</code> (default).</li>
+<li>
+<p>Naming an attribute replaces the item's default for <strong>that attribute only</strong>; the rest of the
+defaults stay (a sword you give <code>armor</code> still hits for its normal <code>attack_damage</code>).</p>
+</li>
+<li>
+<p>Each modifier gets a fixed key <code>shopforge:&lt;item&gt;_&lt;attribute&gt;</code>, so it is the same on every delivery.</p>
+</li>
+<li><code>HIDE_ATTRIBUTES</code> hides them from the tooltip; without it they show as in vanilla.</li>
+<li>A bad entry (unknown attribute, slot or operation, amount not a number) is reported in the console with
+the file and item, and the item loads without it.</li>
+</ul>
 <h3 id="marks">Marks</h3>
 <p>An item with <code>custom-data</code> (or <code>pdc</code>) is recognised <strong>by that mark alone</strong>, never by its name,
 lore or texture. Reword the description later and the items players already hold still count.
@@ -184,6 +218,8 @@ trades:
     cost: [{crateforge-key: vote, amount: 4}]
     result: {crateforge-key: rare}
     # permission: myserver.vip   # optional, per trade (hidden without it)
+    # stock-per-player: 2        # optional: how many times each player can make this trade...
+    # stock-refill-hours: 24     # ...before the count resets (default 24)
 </code></pre>
 <ul>
 <li>
@@ -197,6 +233,12 @@ makes them (they stack with keys from <code>/cf givekey</code>).</p>
 <li>
 <p><strong>Opening:</strong> <code>/shop &lt;id&gt;</code>, a Citizens NPC (select it, then <code>/shop npc &lt;id&gt;</code>), or
 <code>/shop open &lt;player&gt; &lt;id&gt;</code> from the console, a menu or an NPC command.</p>
+</li>
+<li>
+<p><strong>Limits per player:</strong> <code>stock-per-player</code> (+ <code>stock-refill-hours</code>) caps how many times one player can make
+a trade. The count is kept in the database (it survives restarts and <code>/shop reload</code>); when it runs
+out the villager crosses the trade out and the player gets the usual sold-out message. After each trade
+the player is told how many are left.</p>
 </li>
 <li>
 <p><strong>Picking a trade</strong> in the list moves the right items from the inventory into the slots.</p>
