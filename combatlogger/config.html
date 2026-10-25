@@ -98,9 +98,9 @@ combat:
   disable-elytra: true      # No elytra gliding while tagged.
   restrictions-pvp-only: true # Flight and elytra limits only after a hit from another player, not from mobs.
   pearl-cooldown-seconds: 0 # Ender pearl cooldown while tagged, in seconds (0 = vanilla 1 s).
-  untag-on-enemy-death: true  # When the last player who hit you dies, your tag ends.
+  untag-on-enemy-death: true  # When a player who hit you dies and nobody else who hit you is still alive and online, your tag ends.
   block-teleport: true      # Refuse teleports from commands and other plugins (warp/home menus) while tagged. Pearls and portals still work.
-  exempt-kicks: true        # A player kicked by staff, or a server shutting down, is not a combat log.
+  exempt-kicks: true        # A player kicked by staff or a plugin, banned, removed by the whitelist, or a server shutting down is not a combat log. Kicks the player causes (spam, illegal characters, timeouts) still are.
   tag-indirect: true        # End crystals, respawn anchors, beds, TNT, lingering potions and tamed pets tag the player behind them.
 
 # ============================================================
