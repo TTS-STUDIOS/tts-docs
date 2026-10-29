@@ -59,8 +59,10 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ItemForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>limits</code>, <code>protected-materials</code>, <code>costs</code>, <code>cooldowns</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># ItemForge — the item in your hand, edited from one command.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ItemForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>limits</code>, <code>protected-materials</code>, <code>costs</code>, <code>cooldowns</code>, <code>log</code>, <code>debug</code>, <code>catalog</code>.</p><pre class='config'><code># ItemForge — the item in your hand, edited from one command.
 #
 # Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
 # allowed lives here, which is the point: the plugins this replaces keep their
@@ -124,6 +126,33 @@ log:
 debug:
   # Anonymous usage stats at bstats.org. Turn it off on an offline network.
   bstats: true
+
+# Catalog items (catalog/*.yml), recipes (recipes/*.yml) and sets (sets/*.yml): see docs/CATALOG.
+catalog:
+  # Order of the automatic description. An empty line is a spacer; unknown lines are kept as written.
+  lore-layout:
+    - &quot;{rarity}&quot;
+    - &quot;{origin}&quot;
+    - &quot;{piece}&quot;
+    - &quot;&quot;
+    - &quot;{enchants}&quot;
+    - &quot;{description}&quot;
+    - &quot;&quot;
+    - &quot;{warnings}&quot;
+    - &quot;{death}&quot;
+    - &quot;{cracked}&quot;
+  # A rarity written on an item can be a key here or any MiniMessage text.
+  rarities:
+    common: &quot;&lt;white&gt;Common&quot;
+    rare: &quot;&lt;aqua&gt;Rare&quot;
+    epic: &quot;&lt;light_purple&gt;Epic&quot;
+    legendary: &quot;&lt;gold&gt;Legendary&quot;
+  text:
+    origin: &quot;&lt;gray&gt;Origin: &lt;white&gt;{origin}&lt;/white&gt;&lt;/gray&gt;&quot;
+    piece: &quot;&lt;gray&gt;Piece {n} of {m}&lt;/gray&gt;&quot;
+    enchant: &quot;&lt;gray&gt;{name} {level}&lt;/gray&gt;&quot;
+    on-death-crack: &quot;&lt;red&gt;Cracks when you die&lt;/red&gt;&quot;
+    cracked: &quot;&lt;red&gt;Cracked: no ability and half its attributes. Repair it at an anvil.&lt;/red&gt;&quot;
 </code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>

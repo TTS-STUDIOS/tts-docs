@@ -59,6 +59,8 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> AfkGuard writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>afk</code>, <code>reasons</code>, <code>auto-kick</code>.</p><pre class='config'><code># ============================================================
 #  AfkGuard v1.0.0  ·  Configuration
@@ -93,6 +95,9 @@ afk:
     cyclic-pattern-detection: true
     history-size: 20
     max-cycle-length: 10
+    # Seconds the same loop must keep going before the player is marked AFK.
+    # Jumping in place or pacing between two blocks is short; a macro pool is not.
+    cyclic-min-seconds: 120
 
   visual:
     # Line floating above an AFK player&#x27;s name (MiniMessage). Works alongside

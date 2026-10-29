@@ -59,8 +59,10 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>disabled-enchants</code>, <code>altar</code>, <code>anvil</code>, <code>enchants</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>disabled-enchants</code>, <code>altar</code>, <code>anvil</code>, <code>enchants</code>, <code>exclusive</code>.</p><pre class='config'><code># =============================================================================
 #  EnchantsForge — main config
 # =============================================================================
 #  Custom enchantments suite by TTS-Studio.
@@ -126,6 +128,21 @@ enchants:
     # How long (in ticks) frosted ice survives before melting. Vanilla
     # FrostWalker uses roughly 80 ticks (~4 seconds).
     ice-duration: 80
+
+# -----------------------------------------------------------------------------
+# Exclusive enchantments (1.8)
+# -----------------------------------------------------------------------------
+# These never come from the altar, orbs, books or fusion: only /ef apply or the API
+# (EnchantsForgeApi.apply). Cooldowns are in seconds.
+exclusive:
+  bite: {seconds: 3, damage-per-second: 1.0}
+  whirlpool: {cooldown-seconds: 8, radius: 3, max-radius: 8}
+  web: {cooldown-seconds: 10, seconds: 1.0}
+  mend_aura: {cooldown-seconds: 15, heal: 4.0, radius: 5}
+  shed: {cooldown-seconds: 30}
+  watcher_sight: {radius: 16}
+  lava_walk: {seconds: 4}
+  plunder: {chance-per-level: 30, max-extra-stacks: 8}
 </code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
