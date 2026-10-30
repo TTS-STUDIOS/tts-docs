@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CrateForge — Animations · TTS-Studio docs</title>
-<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<meta name="description" content="Sixteen reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,8 +62,50 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Animations</h1><p>CrateForge includes <strong>11 unique animations</strong> that play when a crate is opened. Each animation provides a different visual experience for players. Set the animation per-crate in the crate's <code>.yml</code> file.</p>
-<h2 id="quick-reference">Quick reference</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Animations</h1><p>CrateForge includes <strong>16 animations</strong> that play when a crate is opened: <strong>3 in the world</strong>, over the crate itself, and <strong>13 classic ones</strong>, most of them in a menu. Set the animation per crate in the crate's <code>.yml</code> file, and try any of them without spending a key with <code>/cf demo &lt;animation&gt; [crate]</code>.</p>
+<h2 id="world-animations-1120">World animations (1.12.0)</h2>
+<p>These play <strong>in the world, over the crate</strong>, with display entities: no menu opens, and the players standing around watch the same show as the opener. They are built only from what the game already has (items, blocks, particles and sounds), so they still look like Minecraft.</p>
+<table>
+<thead>
+<tr>
+<th>Animation</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ROLL3D</code></td>
+<td>The case opening in 3D. A curved reel of prizes sweeps across a black screen over the crate, ticks louder and higher as it brakes, crawls the last slots with the name of the prize under the marker, and the winner rises out of the reel.</td>
+</tr>
+<tr>
+<td><code>ORBIT</code></td>
+<td>An enchanting ritual. The prizes rise out of the crate one by one and circle it while the enchanting glyphs stream in. The ring winds down with the name of the prize in front, lightning strikes the winner and the rest are blown away.</td>
+</tr>
+<tr>
+<td><code>METEOR</code></td>
+<td>A block of magma falls out of the sky trailing fire and smoke and slams into the crate. Rock flies, a ring of dust runs along the ground, and what is left cracks three times, the last crack already in the prize's colour, before bursting open with the prize inside.</td>
+</tr>
+</tbody>
+</table>
+<p>Every world animation ends the same way: the prize floats over the crate with its name and rarity in the rarity's colour and a beam of light, and the celebration (title, sound, particles, fireworks from epic up) goes off over the crate. While the show runs, the crate's own hologram and floating item step aside.</p>
+<pre><code class="language-yaml">animation: ROLL3D
+</code></pre>
+<h3 id="who-sees-what">Who sees what</h3>
+<ul>
+<li><strong>Clients that cannot draw display entities</strong> (older than 1.19.4 through ViaVersion, or Bedrock through Geyser) get the classic animation in <code>world-animations.fallback</code> instead (<code>CSGO</code> by default). They still win the same prize.</li>
+<li><strong>A busy crate</strong>: if someone is already watching a show on that crate, the next opener gets the classic animation, so two shows never overlap.</li>
+<li><strong>Spectators</strong>: <code>visibility</code> decides who else watches: <code>all</code>, <code>proximity</code> (within <code>radius</code> blocks) or <code>opener</code>.</li>
+</ul>
+<pre><code class="language-yaml"># config.yml
+world-animations:
+  enabled: true            # false: every world animation plays the fallback.
+  visibility: proximity    # all | proximity | opener
+  radius: 24
+  min-protocol: 762        # 762 = 1.19.4
+  fallback: CSGO
+</code></pre>
+<p>Nothing is ever saved to the world: the show's entities are never written to disk, not even after a crash, and they are removed when the show ends, when the opener leaves or when the server stops.</p>
+<h2 id="classic-animations-quick-reference">Classic animations — quick reference</h2>
 <table>
 <thead>
 <tr>
@@ -127,6 +169,16 @@
 <td><code>MYSTERY</code></td>
 <td>Suspense-building hidden reveal</td>
 <td>Mystery/Halloween events</td>
+</tr>
+<tr>
+<td><code>PORTAL</code></td>
+<td>Particle portal ring around the player</td>
+<td>Magic/fantasy crates</td>
+</tr>
+<tr>
+<td><code>PARTICLES</code></td>
+<td>A ParticleForge effect (<code>crate/&lt;crate&gt;-win</code>)</td>
+<td>Servers using ParticleForge</td>
 </tr>
 </tbody>
 </table>
@@ -283,6 +335,10 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Any server on 1.19.4+</td>
+<td>ROLL3D, ORBIT, METEOR</td>
+</tr>
 <tr>
 <td>Survival / SMP</td>
 <td>CSGO, ROULETTE, FIREWORKS</td>

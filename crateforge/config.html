@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CrateForge — Configuration reference · TTS-Studio docs</title>
-<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<meta name="description" content="Sixteen reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,7 +62,7 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>shop</code>, <code>mass-open</code>, <code>left-click-preview</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>body</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>shop</code>, <code>mass-open</code>, <code>left-click-preview</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>world-animations</code>, <code>holograms</code>, <code>ambient</code>, <code>body</code>, <code>visual-hooks</code>, <code>economy</code>.</p><pre class='config'><code># ============================================================================
 # CrateForge — main configuration
 # ----------------------------------------------------------------------------
 # Free crate plugin for Paper and Spigot 1.19.4+. Every option below is annotated.
@@ -127,6 +127,19 @@ daily-bonus:
   enabled: true
   key-id: &quot;legendary_key&quot;
   cooldown-hours: 24
+
+# ===== World animations (1.12.0) ============================================
+# ROLL3D, ORBIT and METEOR play in the world, over the crate, with display
+# entities: everyone around sees the reel spin and the prize rise. Players whose
+# client cannot draw them (older than 1.19.4 through ViaVersion, or Bedrock
+# through Geyser) get the classic animation below instead, and so does an opening
+# while the same crate is already busy with someone else&#x27;s show.
+world-animations:
+  enabled: true            # false: every world animation plays the fallback below.
+  visibility: proximity    # all | proximity | opener — who else watches the show.
+  radius: 24               # Blocks, for `proximity`.
+  min-protocol: 762        # Lowest client that sees the world version (762 = 1.19.4).
+  fallback: CSGO           # Classic animation for everyone else.
 
 # ===== Holograms ============================================================
 # Floating text displayed above placed physical crates (crate name + key hint).

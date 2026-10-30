@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CrateForge — CrateForge · TTS-Studio docs</title>
-<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<meta name="description" content="Sixteen reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,11 +62,16 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>CrateForge</h1><p class='linea'>Twelve reveal animations and keys that survive anything</p><p class='entradilla'>CrateForge is a free crate plugin for Paper and Spigot, 1.19.4 to 26.x. Each crate has one of thirteen reveal animations, shows its key floating above it with a ring of particles in its own colour, and has a pity counter that guarantees a rare prize after a run of bad luck.</p>
-<h2>How it works in play</h2><ul>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>CrateForge</h1><p class='linea'>Sixteen reveal animations and keys that survive anything</p><p class='entradilla'>CrateForge is a free crate plugin for Paper and Spigot, 1.19.4 to 26.x. Each crate has one of sixteen reveal animations, shows its key floating above it with a ring of particles in its own colour, and has a pity counter that guarantees a rare prize after a run of bad luck.</p>
+<h2>Animations in the world</h2><p>Three of the animations play over the crate itself instead of in a menu, and by default everyone within 24 blocks watches the same show. They are built only from the game's own blocks, items, particles and sounds, so no resource pack is needed.</p>
+<p><strong>Roll3D:</strong> a curved reel of prizes brakes onto the winner, which rises out of it.</p>
+
+<p><strong>Orbit:</strong> the prizes circle the crate like an enchanting ritual until lightning strikes the winner.</p>
+
+<p><strong>Meteor:</strong> a burning meteor slams into the crate, cracks three times and bursts open with the prize.</p><h2>How it works in play</h2><ul>
 <li><strong>Placed crates:</strong> each one shows its key turning above it, a particle aura and a hologram with its name. Staff can locate any placed crate with <code>/cf find</code>.</li>
 <li><strong>Odds:</strong> <code>/cf preview &lt;crate&gt;</code> lists every prize with its rarity, weight and exact chance.</li>
-<li><strong>Opening:</strong> right-click with the matching key and the crate's animation plays. The options include a CS:GO reel, a roulette, a slot machine and fireworks in the world.</li>
+<li><strong>Opening:</strong> right-click with the matching key and the crate's animation plays. The options include a 3D reel, an enchanting ritual and a meteor over the crate, a CS:GO reel, a roulette, a slot machine and fireworks.</li>
 <li><strong>Pity counter:</strong> after 50 opens without a rare prize, the next one is guaranteed at that tier or above. Both numbers are set per crate.</li>
 <li><strong>Open many at once:</strong> shift + right-click with a stack of keys opens up to 64 in one go, with one line in chat listing everything won.</li>
 </ul><h2>Prizes and keys</h2><ul>
@@ -88,6 +93,7 @@
 </ul>
 <p>None of them are required. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Is it really free?</strong><br>Yes. The whole plugin is free and needs no license key.</p>
 <p><strong>Will a spawn full of animated crates lag?</strong><br>Only players within 24 blocks receive the effect, and you cap how many crates animate at once. The refresh rate is one setting.</p>
+<p><strong>What do players on old versions or Bedrock see?</strong><br>Players whose client is older than 1.19.4, or who join from Bedrock through Geyser, get a classic animation instead (CS:GO by default) and win the same prize.</p>
 <p><strong>Can players spam-open crates?</strong><br>There's a minimum gap between two opens by the same player, and clicks during an animation are ignored.</p>
 <p><strong>Can other plugins react to openings?</strong><br>Yes: <code>CrateOpenStartEvent</code>, <code>CratePrizeWonEvent</code> and <code>KeyObtainedEvent</code>.</p>
 <p><strong>Can I translate it?</strong><br>English and Spanish are included, in MiniMessage.</p>
