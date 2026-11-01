@@ -108,7 +108,9 @@ bossbar:
 # Shows the tracked quest&#x27;s current objective progress in the action bar.
 # interval-ticks: how often to update. 20 = 1 second.
 action-bar:
-  enabled: true
+# Off by default: the boss bar already shows it, and twice on screen is noise.
+# Turn it on if you disable the boss bar. /quest reload applies the change.
+  enabled: false
   interval-ticks: 20
 
 # ── Reach objective polling ─────────────────────────────────────────────────
