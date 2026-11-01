@@ -62,7 +62,7 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SkillsRPG writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>storage</code>, <code>mana</code>, <code>hud</code>, <code>autosave-minutes</code>, <code>audit-log</code>, <code>anti-abuse</code>, <code>integrations</code>, <code>leaderboards</code>, <code>level-rewards</code>, <code>respec</code>.</p><pre class='config'><code># SkillsRPG configuration — TTS-Studio
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SkillsRPG writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>storage</code>, <code>mana</code>, <code>hud</code>, <code>autosave-minutes</code>, <code>audit-log</code>, <code>anti-abuse</code>, <code>integrations</code>, <code>leaderboards</code>, <code>level-rewards</code>, <code>jobs</code>, <code>respec</code>.</p><pre class='config'><code># SkillsRPG configuration — TTS-Studio
 # Documentation: https://docs.tiamatmc.net/skillsrpg/
 
 # Active language. ISO-639-1 two-letter code (lowercase).
@@ -147,6 +147,27 @@ level-rewards:
       commands:
         - &quot;give {player} minecraft:diamond 5&quot;
       message: &quot;&lt;aqua&gt;Mining 50 — five diamonds for the road.&quot;
+
+# Jobs: pay money (Vault) for the XP players earn by playing. It counts the XP SkillsRPG already
+# gives, so placed blocks, spawner mobs (see anti-abuse), AFK players, creative and admin grants
+# never pay. money-per-xp is per skill (0 = that skill pays nothing). Example: mining 0.5 pays
+# 0.5 for stone (1 XP) and 7.5 for a diamond ore (15 XP). max-per-hour caps what one player can
+# earn from jobs in an hour (0 = no cap); relogging does not reset it. Payouts are added up and
+# paid every pay-every-seconds (read at startup) with one actionbar line. Permission: skillsrpg.jobs.
+jobs:
+  enabled: false
+  money-per-xp:
+    swords: 0.4
+    axes: 0.35
+    archery: 0.6
+    defense: 0.0
+    mining: 0.5
+    woodcutting: 0.4
+    farming: 0.4
+    fishing: 1.5
+  max-per-hour: 2000
+  pay-every-seconds: 5
+  actionbar: true
 
 respec:
   base-cost: 1000
