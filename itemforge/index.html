@@ -63,10 +63,16 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>ItemForge</h1><p class='linea'>The item in your hand, edited from one command</p><p class='entradilla'>ItemForge edits the item in your hand from one command, on Paper and Spigot from 1.17 to 26.x: name, lore, enchantments, flags, unbreakable, stack size, custom model data and player heads. No other plugin is needed.</p>
-<p>What sets it apart from the rename command your server probably has is not the list of verbs. It is that the three things those commands get wrong are the three things a staff member gets blamed for later.</p><h2>The three decisions</h2><ul>
+<p>Since 2.0 it also keeps a catalog: the custom items of your server written once in a file, with their own recipes, sets and what happens to them when a player dies.</p><p>What sets it apart from the rename command your server probably has is not the list of verbs. It is that the three things those commands get wrong are the three things a staff member gets blamed for later.</p><h2>The three decisions</h2><ul>
 <li><strong>Length is a limit, and it counts what the player sees:</strong> formatting codes take no room on screen, so they don't count against it. A name past the limit breaks anvils, holograms and hover text, which is why the ceiling exists.</li>
 <li><strong>Colour, style and obfuscated text are three permissions:</strong> colour is decoration, bold is how a dropped item passes for a staff one, and obfuscated text scrambles what the item is. <code>itemforge.format.magic</code> defaults to false, not to operators.</li>
 <li><strong>It lives in your config:</strong> to protect another material you don't recompile anything, and a material name that doesn't exist is reported on startup instead of silently doing nothing.</li>
+</ul><h2>Your own items, in a file</h2><ul>
+<li><strong>The catalog:</strong> each item in <code>catalog/*.yml</code> has its material, model, a name with gradients, enchantments (vanilla, or EnchantsForge ones with <code>ef:</code>), attributes and its own durability. The description is written for you: rarity, where it comes from, "Piece 1 of 2" and any warning. <code>/item give &lt;id&gt;</code> hands it out and <code>/item list</code> shows them all.</li>
+<li><strong>Recipes and tiers:</strong> shaped and shapeless crafting, the smithing table (with amounts) and anvil repair with the material you choose. An ingredient is matched exactly, so a renamed stick is not your custom stick. Going up a tier keeps the enchantments and the durability.</li>
+<li><strong>Sets:</strong> wearing two or more pieces gives potion effects, extra hearts, or a bonus that fires when health drops below a percentage, with its own cooldown.</li>
+<li><strong>Cracked items:</strong> with <code>on-death: crack</code> the item is never dropped. It comes back at respawn cracked, without its ability and with half its attributes, until someone repairs it at an anvil.</li>
+<li><strong>Owned items follow the catalog:</strong> change a value in the file and the copies players already carry are updated when they join or after <code>/item reload</code>.</li>
 </ul><h2>Details that only show up in use</h2><ul>
 <li><strong>Italic is turned off</strong> on every name and lore line. Minecraft italicises any custom name by itself, so a name typed with no formatting would otherwise come out formatted.</li>
 <li><strong>A tag nobody granted has no meaning:</strong> the parser is built from the player's permissions, so a tag that isn't colour, style or obfuscated is left on the item as plain text.</li>
@@ -79,9 +85,11 @@
 <li><code>/item lore add|set|remove|clear</code></li>
 <li><code>/item enchant &lt;name&gt; &lt;level&gt;</code>, <code>/item unenchant &lt;name&gt;</code> and <code>/item clearenchants</code>. Names resolve the way a player would type them, with tab completion.</li>
 <li><code>/item flag &lt;flag&gt;</code>, <code>/item unbreakable</code>, <code>/item amount &lt;n&gt;</code> and <code>/item model &lt;n&gt;</code></li>
+<li><code>/item give &lt;id&gt; [player] [amount]</code> and <code>/item list</code> for the catalog.</li>
 <li><code>/item head &lt;player&gt;</code>, <code>/item strip</code> and <code>/item reload</code> (aliases <code>/itemforge</code> and <code>/if</code>).</li>
 </ul><h2>Permissions</h2><ul>
 <li>One per verb (<code>itemforge.name</code>, <code>itemforge.lore</code>, <code>itemforge.enchant</code> and so on), so a builder rank can rename but not make things unbreakable. All default to operators.</li><li><code>itemforge.player</code> is the kit to hand a default group: rename and lore with colours only. No bold or italic, no obfuscated text and no protected materials.</li>
+<li><code>itemforge.give</code> to hand out catalog items and see the list.</li>
 <li>Three for formatting: <code>itemforge.format.colour</code>, <code>itemforge.format.style</code> and <code>itemforge.format.magic</code>.</li>
 <li><code>itemforge.protected</code> for the material list, and <code>itemforge.limits.bypass</code> for a staff member testing something. The second defaults to false: it is granted, not inherited by being an operator.</li>
 <li>Every node is declared in <code>plugin.yml</code>, so your permissions plugin can see them all.</li>
@@ -93,7 +101,7 @@
 <li>English and Spanish are included, and every string a player sees lives in the language file.</li>
 </ul><h2>Requirements</h2><ul>
 <li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, and Folia, on the Java version your server already uses.</li>
-<li>No other plugin needed.</li>
+<li>No other plugin needed. Smithing recipes need 1.20 or newer, and MythicMobs items can be used as ingredients if you have it.</li>
 </ul><h2>FAQ</h2><p><strong>Can a player use it?</strong><br>Yes, and safely: give them <code>itemforge.player</code> and they get <code>/rename</code> and lore with colours, nothing else. Set a price and a cooldown in <code>config.yml</code> if renaming should cost something. Everything else defaults to operators.</p>
 <p><strong>Can I stop people renaming spawners?</strong><br>Spawners are protected out of the box. Add any other material to the protected list in <code>config.yml</code>.</p>
 <p><strong>Can I see who edited what?</strong><br>Yes. Turn on the console log and every edit is written with the player, the item and the change.</p>
