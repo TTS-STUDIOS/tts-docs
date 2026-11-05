@@ -120,6 +120,8 @@ broadcast:
   enabled: true            # Toggle the broadcast feature globally.
   min-rarity: RARE         # Only prizes at this rarity or above trigger a broadcast.
                            # Allowed: COMMON | UNCOMMON | RARE | EPIC | LEGENDARY
+  skip-crates: []          # Crate ids that never broadcast (e.g. [vote] if vote crates
+                           # are opened so often that they would flood the chat).
 
 # ── Daily Bonus ──────────────────────────────────────────────────────────────
 # Players can claim one free key every `cooldown-hours` hours via /cf daily.
