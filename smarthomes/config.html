@@ -59,8 +59,10 @@
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
+<li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
+</li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SmartHomes writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>limits</code>, <code>warmup</code>, <code>cooldown</code>, <code>vault</code>, <code>homes-gui</code>, <code>home-options-gui</code>, <code>back</code>.</p><pre class='config'><code># ──────────────────────────────────────────────────────────────────────────────
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SmartHomes writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>limits</code>, <code>sethome</code>, <code>warmup</code>, <code>cooldown</code>, <code>vault</code>, <code>homes-gui</code>, <code>home-options-gui</code>, <code>back</code>.</p><pre class='config'><code># ──────────────────────────────────────────────────────────────────────────────
 #  SmartHomes — config.yml
 #  by TTS-Studio · MiniMessage formatting throughout · all values hot-reloadable
 #  via /sh reload (warmups in flight finish on their original timing).
@@ -78,6 +80,14 @@ language: en
 # `smarthomes.limit.&lt;n&gt;` permission they hold, falling back to `default`.
 limits:
   default: 3                   # baseline when no smarthomes.limit.&lt;n&gt; is granted
+  per-world: 0                 # max homes in any one world (0 = no cap); smarthomes.bypass.worlds skips it
+
+# ─── /sethome ─────────────────────────────────────────────────────────────────
+# Worlds where /sethome is refused (case-insensitive), e.g. a minigame or
+# spawn world. Existing homes there still work. Players with
+# `smarthomes.bypass.worlds` can set homes anyway.
+sethome:
+  blocked-worlds: []
 
 # ─── Warmup ───────────────────────────────────────────────────────────────────
 # Brief countdown before the teleport actually happens. Cancels on movement
