@@ -62,7 +62,7 @@
 <li><a class='' href='../craftblockforge/index.html'>CraftBlockForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> AfkGuard writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>afk</code>, <code>reasons</code>, <code>auto-kick</code>.</p><pre class='config'><code># ============================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> AfkGuard writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>afk</code>, <code>reasons</code>, <code>rewards</code>, <code>auto-kick</code>.</p><pre class='config'><code># ============================================================
 #  AfkGuard v1.0.0  ·  Configuration
 # ------------------------------------------------------------
 #  Part of the TTS-Studio plugin suite.
@@ -84,6 +84,14 @@ afk:
   per-permission-timeouts:
     &quot;afkguard.timeout.vip&quot;: 600
     &quot;afkguard.timeout.premium&quot;: 1200
+
+  # Worlds where nobody is auto-marked AFK (lobby, minigame or event worlds).
+  # Players can still use /afk by hand. Example: [lobby, spawn]
+  disabled-worlds: []
+
+  # Tell the player this many seconds before the timeout that they are about to
+  # be marked AFK (any movement or chat cancels it). 0 turns it off.
+  warn-before-seconds: 0
 
   detection:
     # Require an actual block change before resetting the AFK timer —
@@ -147,6 +155,44 @@ reasons:
     - brb
     - working
     - sleeping
+
+# ============================================================
+#  AFK REWARDS  (v1.6.0)
+# ------------------------------------------------------------
+#  Pay players who stay AFK: useful for an AFK zone or an AFK room.
+#  The clock starts when they go AFK and moving starts it again, so
+#  a reward always means a full interval without playing.
+#
+#  - enabled: false -&gt; nothing is paid (default, non-breaking).
+#  - interval-minutes: AFK time between rewards.
+#  - daily-limit: rewards per player per day, 0 for no limit. It is
+#    saved, so leaving and coming back does not reset it. The day
+#    changes at midnight, server time.
+#  - require-zone: pay only players the AFK zone took away (afk.zone).
+#  - worlds: pay only in these worlds. Empty = every world.
+#  - commands: run from the console. {player}, {uuid} and {count}
+#    (rewards paid today, this one included) are filled in.
+#  - tiers: the first one whose permission the player has replaces
+#    the values it sets; the rest stay as above.
+#    Operators hold every permission, so they get the first tier.
+#    For no tiers write &quot;tiers: []&quot;: deleting the key keeps the default.
+#  If auto-kick is on, keep its threshold above interval-minutes or
+#  players are kicked before they earn anything.
+#  Permission: afkguard.rewards (default true). /afk rewards shows
+#  how many were paid today and when the next one comes.
+# ============================================================
+rewards:
+  enabled: false
+  interval-minutes: 10
+  daily-limit: 12
+  require-zone: false
+  worlds: []
+  commands:
+    - &quot;eco give {player} 50&quot;
+  tiers:
+    - permission: &quot;afkguard.rewards.vip&quot;
+      interval-minutes: 5
+      daily-limit: 24
 
 # ============================================================
 #  AUTO-KICK  (v1.2.0)
