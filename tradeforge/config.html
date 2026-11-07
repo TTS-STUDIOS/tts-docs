@@ -77,6 +77,10 @@ trade:
   # Seconds a request waits before it expires on its own.
   request-timeout: 60
 
+  # Seconds a player must wait between two invitations they send, so nobody can
+  # flood a server with /trade requests. 0 = no wait.
+  request-cooldown: 5
+
   # How far apart two traders may stand, in blocks. 0 = no limit.
   # Measured again on every settlement: walking away mid-trade cancels it.
   max-distance: 15
@@ -91,6 +95,10 @@ trade:
   # Materials that cannot be put on the table, by name. Anyone with
   # tradeforge.bypass.blocked ignores this.
   blocked-materials: []
+
+  # Worlds where trading is refused, by name. Anyone with tradeforge.bypass.worlds
+  # ignores this.
+  blocked-worlds: []
 
   # Refuse to start a trade while either player is in combat. Needs a plugin
   # that marks combat through the metadata key below; ignored when absent.
